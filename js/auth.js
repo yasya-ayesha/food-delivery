@@ -37,14 +37,14 @@ buttonOut.addEventListener('click', () => {
 
 logInForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  if (inputLogin.value && inputPassword.value) {
+  if (inputLogin.value.trim() && inputPassword.value) {
     const user = {
-      login: inputLogin.value,
+      login: inputLogin.value.trim(),
       password: inputPassword.value
     };
     localStorage.setItem('user', JSON.stringify(user));
     login(user);
-  } else if (!inputLogin.value) {
+  } else if (!inputLogin.value.trim()) {
     alert('Для авторизации необходимо ввести логин');
   } else if (!inputPassword.value) {
     alert('Для авторизации необходимо ввести пароль');
