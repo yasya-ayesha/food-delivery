@@ -37,7 +37,7 @@ const partners = () => {
         e.preventDefault();
         if (localStorage.getItem('user')) {
           localStorage.setItem('restaurant', JSON.stringify(item));
-          window.location.href = '/restaurant.html';
+          window.location.href = 'restaurant.html';
         } else {
           const modalAuth = document.querySelector('.modal-auth');
           modalAuth.style.display = 'flex';
