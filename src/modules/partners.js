@@ -13,7 +13,7 @@ const partners = () => {
         time_of_delivery
       } = item;
       const a = document.createElement('a');
-      a.setAttribute('href', '/restaurant.html');
+      a.setAttribute('href', 'restaurant.html');
       a.classList.add('card');
       a.classList.add('card-restaurant');
       a.dataset.products = products;
