@@ -1,15 +1,35 @@
 const menu = () => {
   const cardsMenu = document.querySelector('.cards-menu');
 
+  const cartArray = localStorage.getItem('cart') ? 
+    JSON.parse(localStorage.getItem('cart')) : 
+    [];
+
   const changeTitle = (restaurant) => {
     const restaurantTitle = document.querySelector('.restaurant-title');
     const rating = document.querySelector('.rating');
     const price = document.querySelector('.price');
     const category = document.querySelector('.category');
+
     restaurantTitle.textContent = restaurant.name;
     rating.textContent = restaurant.stars;
     price.textContent = `От ${restaurant.price} ₽`;
     category.textContent = restaurant.kitchen;
+  }
+
+  const addToCart = (cartItem) => {
+    if (cartArray.some((item) => item.id === cartItem.id)) {
+      cartArray.map((item => {
+        if (item.id === cartItem.id) {
+          item.count++;
+        }
+        return item;
+      }))
+    } else {
+      cartArray.push(cartItem);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cartArray));
   }
 
   const renderItems = (data) => {
@@ -42,6 +62,11 @@ const menu = () => {
 				</div>
 			</div>
     `;
+
+      card.querySelector('.button-card-text').addEventListener('click', () => {
+        addToCart({ name, price, id, count: 1 });
+      });
+      
       cardsMenu.append(card);
     });
   };
@@ -49,6 +74,7 @@ const menu = () => {
   if (localStorage.getItem('restaurant')) {
     const restaurant = JSON.parse(localStorage.getItem('restaurant'));
     changeTitle(restaurant);
+    
     fetch(`https://fooddelivery-a5981-default-rtdb.firebaseio.com/db/${restaurant.products}`)
       .then((response) => response.json())
       .then((data) => {

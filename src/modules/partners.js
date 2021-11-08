@@ -12,7 +12,9 @@ const partners = () => {
         stars,
         time_of_delivery
       } = item;
+
       const a = document.createElement('a');
+
       a.setAttribute('href', 'restaurant.html');
       a.classList.add('card');
       a.classList.add('card-restaurant');
@@ -33,6 +35,7 @@ const partners = () => {
 				</div>
 			</div>
     `;
+
       a.addEventListener('click', (e) => {
         e.preventDefault();
         if (localStorage.getItem('user')) {
@@ -43,6 +46,7 @@ const partners = () => {
           modalAuth.style.display = 'flex';
         }
       });
+      
       cardsRestaurants.append(a);
     });
   };
